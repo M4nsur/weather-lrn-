@@ -17,10 +17,13 @@ func GetMyLocation (city string) (*GeoData, error) {
 		}, nil
 	}
 	resp, err := http.Get("https://ipapi.co/json/")
+	
 	if err != nil {
 		return nil, err
 	}
 
+	defer resp.Body.Close()
+	
 	if resp.StatusCode != 200 {
 		return nil, err
 	}
